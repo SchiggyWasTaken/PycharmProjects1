@@ -11,6 +11,8 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
+
+
     if test_config is None:
         #lade die Konfigurationsinstanz, falls sie existiert und nicht getestet wird
         app.config.from_pyfile('config.py', silent=True)
@@ -28,5 +30,8 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello World'
+
+    from . import db
+    db.init_app()
 
     return app
